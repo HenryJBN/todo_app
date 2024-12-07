@@ -19,6 +19,6 @@ def write_todos(_todos, filepath=FILEPATH):
 # this ensures that codes below do not get executed
 # when imported into a different program or file
 
-print(__name__)
+
 if __name__ == "__main__":
     print( "Hello from functions")
