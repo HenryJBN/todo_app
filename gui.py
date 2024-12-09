@@ -1,16 +1,23 @@
 import functions
 import time
 import FreeSimpleGUI as fsg
+import os
+
+
+
+if not os.path.exists("todos.txt"):
+    with open("todos.txt", 'w') as file:
+        pass
 
 fsg.theme("darkGreen")
 clock = fsg.Text('', key='clock')
-label = fsg.Text("Enter A Todo:", size=10)
+label = fsg.Text("Enter A Todo:", size=10, )
 input_box = fsg.InputText(tooltip="Enter a to-do", key='todo')
-add_button = fsg.Button("Add")
+add_button = fsg.Button(image_source="add.png", tooltip="Add todo", key="Add")
 list_box = fsg.Listbox(values=functions.get_todos(),
                        key='todos', enable_events=True, size=[45,10])
 edit_button = fsg.Button("Edit")
-complete_button =fsg.Button("Complete", key='complete')
+complete_button =fsg.Button(image_source="complete.png",  tooltip="Complete Todo" , key='complete')
 exit_button = fsg.Button("Exit")
 # output = fsg.Text(key='output', text_color="red")
 window = fsg.Window("My To-do App",
@@ -34,6 +41,7 @@ while True:
             todos.append(new_todo)
             functions.write_todos(todos)
             window['todos'].update(values=todos)
+            window["todo"].update(value="")
         case 'Edit':
             try:
                 todo_to_edit = values['todos'][0]
